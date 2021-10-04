@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  background-color: #CFE8FF;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.add-size {
+  display: flex;
+  flex: 1;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.listItems {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  height: 50px;
+  border-radius: 5px;
+  padding: 0 5px;
+  border: 1px solid gainsboro;
+}
+
+.listItems:hover {
+  background-color: bisque;
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+}
+
+.incomplete-item {
+  text-decoration: line-through;
+}
+
+.header {
+  background-color: #0dcaf0;
+  font-size: 40px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  font-family: Consolas, serif;
+}
