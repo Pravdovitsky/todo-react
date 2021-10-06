@@ -1,29 +1,37 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import {Row, Col, Button, FormControl} from "react-bootstrap";
 
 function AddTask({taskList, setTaskList}) {
     const [value, setValue] = useState('');
 
-    const addToList = () => {
-        if (value.trim()) {
-            const newTaskList = [...taskList, {
-                id: taskList.length + 1,
-                title: value,
-                status: false
-            }];
+    const handleAdd = useCallback(
+        () => {
+            if (value.trim()) {
+                const newTaskList = [...taskList, {
+                    id: taskList.length + 1,
+                    title: value,
+                    status: false
+                }];
                 setTaskList(newTaskList);
-            localStorage.setItem('savedList', JSON.stringify(newTaskList));
-            setValue('');
-        } else {
-            alert('Заполните поле задачи!!!');
-        }
-    }
+                localStorage.setItem('savedList', JSON.stringify(newTaskList));
+                setValue('');
+            } else {
+                alert('Заполните поле задачи!!!');
+            }
+        }, [value]
+    )
 
-    const keyPress = (e) => {
-        if (e.key === 'Enter') {
-            addToList();
-        }
-    }
+    const keyPress = useCallback(
+        (e) => {
+            if (e.key === 'Enter') {
+                handleAdd();
+            }
+        }, [value])
+
+    const getInputValue = useCallback(
+        (e) => setValue(e.target.value),
+        [value]
+    )
 
     return (
         <Row>
@@ -31,10 +39,10 @@ function AddTask({taskList, setTaskList}) {
                 <FormControl
                     placeholder='Новая задача'
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={getInputValue}
                     onKeyDown={keyPress}
                 />
-                <Button variant="info" onClick={addToList}>Добавить</Button>
+                <Button variant="info" onClick={handleAdd}>Добавить</Button>
             </Col>
         </Row>
     )

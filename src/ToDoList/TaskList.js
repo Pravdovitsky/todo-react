@@ -1,24 +1,29 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Button, Form} from "react-bootstrap";
 
 function TaskList({taskList, setTaskList}) {
 
-    const deleteItem = (id) => {
-        const newList = [...taskList].filter(item => item.id !== id);
-        setTaskList(newList);
-        localStorage.setItem('savedList', JSON.stringify(newList));
-    }
+    const deleteItem = useCallback(
+        (id) => {
+            const newList = [...taskList].filter(item => item.id !== id);
 
-    const changeStatus = (id) => {
-        const newList = taskList.map(item => {
-            if (item.id === id) {
-                return {...item, status: !item.status};
-            }
-            return item;
-        });
-        setTaskList(newList);
-        localStorage.setItem('savedList', JSON.stringify(newList));
-    }
+            setTaskList(newList);
+            localStorage.setItem('savedList', JSON.stringify(newList));
+        }, [taskList]
+    )
+
+    const changeStatus = useCallback(
+        (id) => {
+            const newList = taskList.map(item => {
+                if (item.id === id) {
+                    return {...item, status: !item.status};
+                }
+                return item;
+            });
+            setTaskList(newList);
+            localStorage.setItem('savedList', JSON.stringify(newList));
+        }, [taskList]
+    )
 
     return (
         <div>
